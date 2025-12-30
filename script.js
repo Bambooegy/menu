@@ -1,111 +1,57 @@
-const menu = document.getElementById("menu");
-const cartItems = document.getElementById("cartItems");
+const menuItems = [
+  { name: "Iced Latte Boba", price: 150, img: "images/iced-latte.jpg" },
+  { name: "Dalgona Boba", price: 170, img: "images/dalgona.jpg" },
+  { name: "Spanish Latte Boba", price: 155, img: "images/spanish-latte.jpg" },
+  { name: "Red Bull Popping Boba", price: 180, img: "images/redbull-boba.jpg" },
+  { name: "Popping Boba Fruit Tea", price: 160, img: "images/popping-fruit-tea.jpg" }
+];
+
+const menu = document.getElementById('menu');
+const cartItemsList = document.getElementById('cartItems');
 let cart = [];
 
-/* ==== Render Menu With Images ==== */
-for (const category in menuData) {
-  const section = document.createElement("section");
-  section.innerHTML = `<h2>${category}</h2>`;
+// إنشاء العناصر في الصفحة
+menuItems.forEach(item => {
+  const div = document.createElement('div');
+  div.className = 'item';
+  div.innerHTML = `
+    <img src="${item.img}" alt="${item.name}">
+    <h2>${item.name}</h2>
+    <p>Price: ${item.price} EGP</p>
+    <button onclick="addToCart('${item.name}', ${item.price})">Add to Cart</button>
+  `;
+  menu.appendChild(div);
+});
 
-  menuData[category].forEach(item => {
-    const [name, price1, price2] = item;
-    const div = document.createElement("div");
-    div.className = "item";
-
-    // Generate image name automatically
-    const imageName = name
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/-$/, "");
-
-    const imagePath = `images/${imageName}.jpg`;
-
-    if (price2) {
-      div.innerHTML = `
-        <img 
-          src="${imagePath}" 
-          alt="${name}" 
-          loading="lazy"
-          onerror="this.src='images/default.jpg'"
-        >
-        <strong>${name}</strong>
-        <div class="prices">
-          <button onclick="addToCart('${name}', ${price1}, 'Small')">
-            Small – ${price1} EGP
-          </button>
-          <button onclick="addToCart('${name}', ${price2}, 'Large')">
-            Large – ${price2} EGP
-          </button>
-        </div>
-      `;
-    } else {
-      div.innerHTML = `
-        <img 
-          src="${imagePath}" 
-          alt="${name}" 
-          loading="lazy"
-          onerror="this.src='images/default.jpg'"
-        >
-        <strong>${name}</strong>
-        <button onclick="addToCart('${name}', ${price1}, '')">
-          ${price1} EGP
-        </button>
-      `;
-    }
-
-    section.appendChild(div);
-  });
-
-  menu.appendChild(section);
-}
-
-/* ===== Cart ===== */
-function addToCart(name, price, size) {
-  cart.push({ name, price, size });
+// إضافة للسلة
+function addToCart(name, price) {
+  cart.push({ name, price });
   renderCart();
 }
 
+// عرض محتوى السلة
 function renderCart() {
-  cartItems.innerHTML = "";
+  cartItemsList.innerHTML = '';
   cart.forEach((item, index) => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      ${item.name} ${item.size ? "(" + item.size + ")" : ""} – ${item.price} EGP
-      <span onclick="removeItem(${index})">✕</span>
-    `;
-    cartItems.appendChild(li);
+    const li = document.createElement('li');
+    li.innerHTML = `${item.name} - ${item.price} EGP <span onclick="removeItem(${index})">&times;</span>`;
+    cartItemsList.appendChild(li);
   });
 }
 
+// إزالة عنصر
 function removeItem(index) {
   cart.splice(index, 1);
   renderCart();
 }
 
-/* ===== WhatsApp ===== */
+// إرسال الطلب عبر WhatsApp
 function sendWhatsApp() {
-  if (cart.length === 0) {
-    alert("Your cart is empty");
-    return;
-  }
-
-  let message = `Hello Bamboo Team 👋
-
-I would like to place the following order:
-
-`;
-  let total = 0;
-
+  if(cart.length === 0) return alert("Cart is empty!");
+  let text = "Hello, I want to order:\n";
   cart.forEach(item => {
-    message += `• ${item.name} ${item.size ? "(" + item.size + ")" : ""} – ${item.price} EGP\n`;
-    total += item.price;
+    text += `- ${item.name} : ${item.price} EGP\n`;
   });
-
-  message += `\nTotal: ${total} EGP`;
-
-  const phone = "201019634984";
-  const encodedMessage = encodeURIComponent(message);
-
-  window.open(`https://wa.me/${phone}?text=${encodedMessage}`, "_blank");
+  const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+  window.open(url, "_blank");
 }
-
