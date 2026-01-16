@@ -16,24 +16,24 @@ h1, h2, p { margin: 5px 0; }
 
 .tabs {
   display: flex;
-  overflow-x: auto;
+  flex-wrap: wrap;
   gap: 8px;
   justify-content: center;
-  padding: 10px 0;
+  margin: 12px 0;
 }
 
 .tab {
   background: #0f5132;
   color: white;
   padding: 8px 16px;
-  border-radius: 20px;
+  border-radius: 12px;
   cursor: pointer;
-  white-space: nowrap;
+  transition: .2s;
+  font-size: 14px;
 }
 
-.tab.active {
-  background: #25d366;
-}
+.tab:hover { background: #145c3b; }
+.tab.active { background: #25d366; }
 
 main { padding-bottom: 220px; }
 
@@ -45,6 +45,7 @@ section {
 }
 
 .item {
+  position: relative;
   background: white;
   border-radius: 12px;
   padding: 12px;
@@ -52,16 +53,17 @@ section {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  transition: transform .25s ease;
 }
+
+.item:hover { transform: translateY(-2px); }
 
 .item img {
   width: 100%;
-  height: auto;
   max-height: 220px;
   object-fit: contain;
   border-radius: 12px;
   background: #f5f5f5;
-  cursor: zoom-in;
 }
 
 .item button {
@@ -71,15 +73,31 @@ section {
   border-radius: 8px;
   padding: 10px;
   cursor: pointer;
+  font-size: 15px;
 }
 
-.prices {
-  display: flex;
-  gap: 8px;
+.prices { display: flex; gap: 8px; }
+.prices button { flex: 1; font-size: 14px; }
+
+.best-seller {
+  background: #FFD700;
+  color: #0f5132;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  margin-left: 6px;
 }
 
-.prices button {
-  flex: 1;
+.new-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ff3b3b;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 6px;
 }
 
 .cart {
@@ -102,11 +120,14 @@ section {
 #cartItems li {
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px dashed #ddd;
+  padding: 6px 0;
 }
 
 #cartItems span {
   cursor: pointer;
   color: red;
+  font-size: 18px;
 }
 
 .cart button {
@@ -115,5 +136,20 @@ section {
   border: none;
   padding: 12px;
   width: 100%;
+  font-size: 16px;
   border-radius: 8px;
 }
+
+#toast {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0f5132;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  opacity: 0;
+  transition: .3s;
+}
+#toast.show { opacity: 1; }
