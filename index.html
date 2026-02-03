@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Bamboo Boba</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bamboo Boba Menu</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Bamboo Boba Menu – Order your favorite drinks easily." />
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
 <header>
   <h1>Bamboo Boba</h1>
-  <p>More Bubbles .. Less Troubles</p>
+  <p>More Bubbles · Less Troubles</p>
   <div id="tabs" class="tabs"></div>
 </header>
 
@@ -20,11 +23,11 @@
   <h3>Your Order</h3>
   <ul id="cartItems"></ul>
   <p id="cartTotal"></p>
-  <button onclick="sendWhatsApp()">Order via WhatsApp</button>
+  <button type="button" onclick="sendWhatsApp()">Order via WhatsApp</button>
 </div>
 
-<div id="toast"></div>
+<div id="toast" aria-live="polite"></div>
 
-<script src="script.js"></script>
+<script src="script.js" defer></script>
 </body>
 </html>
