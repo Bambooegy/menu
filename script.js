@@ -15,7 +15,7 @@ const menuData = {
   ],
   "Taro Boba":[
     ["Classic Taro",150,180,"classic-taro.webp"],
-    ["Brown Sugar Taro Boba",160,185,"brown-sugar-taro-boba.webp"]
+    ["Brown Sugar Taro Boba",160,185,"brown-sugar-milk-boba.webp"]
   ],
   "Matcha Boba":[
     ["Matcha Boba",155,185,"matcha-boba.webp"],
@@ -226,3 +226,4 @@ function sendWhatsApp(){
 renderTabs();
 renderMenu();
 renderCart();
+
