@@ -69,7 +69,7 @@ const menuData = {
     ["Mocha",95,null,"mocha.webp"],
     ["Turkish Coffee",70,null,"turkish-coffee.webp"],
     ["Black Tea",55,null,"black-tea.webp"],
-    ["Milk Tea",75,null,"milk-tea.webp"],
+    ["Milk Tea",75,null,"Milk-Tea.webp"],
     ["Karak Tea",85,null,"karak-tea.webp"],
     ["Sahlab",85,null,"sahlab.webp"],
     ["Green Tea",55,null,"green-tea.webp"],
@@ -226,5 +226,6 @@ function sendWhatsApp(){
 renderTabs();
 renderMenu();
 renderCart();
+
 
 
