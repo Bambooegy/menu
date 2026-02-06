@@ -64,7 +64,7 @@ const menuData = {
     ["Macchiato",95,null,"macchiato.webp"],
     ["Cortado",95,null,"cortado.webp"],
     ["French Coffee",85,null,"french-coffee.webp"],
-    ["Hazelnut Coffee",95,null,"hazelnut-coffee.webp"],
+    ["Hazelnut Coffee",95,null,"Hazelnut-Coffee.webp"],
     ["Flat White",85,null,"flat-white.webp"],
     ["Mocha",95,null,"mocha.webp"],
     ["Turkish Coffee",70,null,"turkish-coffee.webp"],
@@ -226,4 +226,5 @@ function sendWhatsApp(){
 renderTabs();
 renderMenu();
 renderCart();
+
 
